@@ -1,0 +1,48 @@
+.MainChat
+
+  .group-info
+    .info-box
+      .info-box__name
+        英会話
+      %ul.info-box__member
+        Member :
+        %li.info-box__member__list masa
+    = link_to "#", class: "edit-btn" do
+      Edit
+
+  .message-list
+    .message-box
+      .message-info
+        .message-info__upper
+          .message-info__upper__name
+            masa
+          .message-info__upper__date
+            2020年07月14日　11時16分
+        .message-info__message
+          hello!
+      .message-info
+        .message-info__upper
+          .message-info__upper__name
+            masa
+          .message-info__upper__date
+            2020年07月14日　11時17分
+        .message-info__message
+          hello world!
+
+  .message-form
+    = form_with class: "form-box" do |f|
+      .text-box
+        = f.text_field :text, placeholder: "type a message", class: "text-box__text"
+        %label{class: "text-box__label"}
+          = icon('far', 'image', class: "text-box__label__icon")
+          %input{type: "file", class: "text-box__label__file"}
+      = f.submit value: "Send", class: "submit-box"
+
+        
+
+    
+      
+
+
+      
+    
