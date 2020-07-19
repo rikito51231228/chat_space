@@ -4,15 +4,17 @@
       .user-box__nickname
         = current_user.name
       .user-box__icon
-        = link_to "#", class: "user-box__icon__btn" do
-          = icon 'fas', 'edit'
+        = link_to new_group_path(current_user), method: :get, class: "user-box__icon__btn" do
+          = icon('fas', 'edit')
           
         = link_to edit_user_path(current_user), method: :get, class: "user-box__icon__btn" do
           = icon('fas', 'cog')
 
   .group-list
-    .group-box
-      .group-name
-        英会話
-      .new-message
-        hello
+    - current_user.groups.each do |group|
+      .group-box
+      = link_to '#', class: "group-box" do
+        .group-name
+          = group.name
+        .new-message
+          hello
