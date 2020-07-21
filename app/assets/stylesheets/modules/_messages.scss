@@ -13,14 +13,14 @@
 }
 
 .wrapper{
-  @include common-tool(100vh,100vw);
+  @include common-tool(100vw,100vh);
   display: flex;
 }
   .SideBar {
     @include common-tool(300px,100vh)
   }
     .user-name{
-      @include common-tool(100%,100px);
+      @include common-tool(300px,100px);
       background-color: #253141;
       display: flex;
       align-items: center;
@@ -104,9 +104,10 @@
     .message-list{
       background-color: #fafafa;
       height: calc(100vh - 190px);
+      overflow: auto;
     }
       .message-box {
-        @include common-tool(calc(100vw - 300px), calc(100vh - 190px));
+        width: calc(100vw - 300px);
         padding: 35px 40px 0px;
       }
         .message-info {
@@ -148,14 +149,14 @@
             padding: 0px 45px 0px 15px;
           }
           &__label {
-            height: 50px;
+            height: 50;
             right: 10px;
             top: 13px;
             position: absolute;
             &__icon {    
               font-size: 25px;
             }
-            &__file {
+            .Hidden {
               display: none;
             }
           }

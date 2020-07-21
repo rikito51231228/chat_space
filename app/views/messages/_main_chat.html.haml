@@ -1,39 +1,24 @@
 .MainChat
-
   .group-info
     .info-box
       .info-box__name
-        英会話
+        = @group.name
       %ul.info-box__member
         Member :
-        %li.info-box__member__list masa
-    = link_to "#", class: "edit-btn" do
+        %li.info-box__member__list 
+          - @group.users.each do |user|
+            = user.name
+    = link_to edit_group_path(@group), class: "edit-btn" do
       Edit
 
   .message-list
-    .message-box
-      .message-info
-        .message-info__upper
-          .message-info__upper__name
-            masa
-          .message-info__upper__date
-            2020年07月14日　11時16分
-        .message-info__message
-          hello!
-      .message-info
-        .message-info__upper
-          .message-info__upper__name
-            masa
-          .message-info__upper__date
-            2020年07月14日　11時17分
-        .message-info__message
-          hello world!
+    = render @messages
 
   .message-form
-    = form_with class: "form-box" do |f|
+    = form_with model: [@group, @message], class: "form-box", local: true do |f|
       .text-box
         = f.text_field :text, placeholder: "type a message", class: "text-box__text"
-        %label{class: "text-box__label"}
+        = f.label :image, class: "text-box__label" do
           = icon('far', 'image', class: "text-box__label__icon")
-          %input{type: "file", class: "text-box__label__file"}
-      = f.submit value: "Send", class: "submit-box"
+          = f.file_field :image, class: "Hidden"
+      = f.submit 'Send', class: "submit-box"
