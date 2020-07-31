@@ -63,5 +63,8 @@ $(function(){
       $('.form-box')[0].reset();
       $('.submit-box').prop("disabled", false);
     })
+    .fail(function(){
+      alert('メッセージの送信に失敗しました');
+    })
   });
 });
