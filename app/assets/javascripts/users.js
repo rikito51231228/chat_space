@@ -1,20 +1,21 @@
 $(function(){
 
   function addUser(user){
-    let html = `<div id="UserSearchResult">
-                  <div class="SettingGroupForm__rightField">
-                    <div class="ChatMembers">${user.name}</div>
-                  </div>
-                </div>`
+    let html = `
+              <div class="ChatMember clearfix">
+                <p class="ChatMember__name">${user.name}</p>
+                <div class="ChatMember__add ChatMember__button" data-user-id="${user.id}" data-user-name="${user.name}">追加</div>
+              </div>
+              `;
     $("#UserSearchResult").append(html)
   }
 
   function addNoUser() {
-    let html = `<div id="UserSearchResult">
-                  <div class="SettingGroupForm__rightField">
-                    <div class="ChatMembers">ユーザーが見つかりません</div>
-                  </div>
-                </div>`
+    let html = `
+              <div class="ChatMember clearfix">
+                <p class="ChatMember__name">ユーザーが見つかりません</p>
+              </div>
+              `;
   $("#UserSearchResult").append(html)
   }
 
@@ -33,8 +34,9 @@ $(function(){
         users.forEach(function(user){
           addUser(user);
         });
-      }
-      else {
+      } else if (input.length == 0) {
+        return false;
+      } else {
         addNoUser();
       }
     })
@@ -43,5 +45,23 @@ $(function(){
     })
   });
 
-  $('.')
+  function addMember(name, id) {
+    let html = `
+                <div class="ChatMember">
+                  <p class="ChatMember__name">${name}</p>
+                  <input name="group[user_ids][]" type="hidden" value="${id}" />
+                  <div class="ChatMember__remove ChatMember__button">削除</div>
+                </div>
+                `;
+  $('.ChatMembers').append(html);
+  }
+  $("#UserSearchResult").on('click', '.ChatMember__add', function(){
+    const userName = $(this).attr("data-user-name");
+    const userId = $(this).attr("data-user-id");
+    $(this).parent().remove();
+    addMember(userName, userId);
+  })
+  $(".ChatMembers").on("click", ".ChatMember__remove", function() {
+    $(this).parent().remove();
+  });
 });
